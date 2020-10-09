@@ -1,4 +1,4 @@
-
+require 'pry'
 
 class Triangle
 
@@ -9,6 +9,7 @@ class Triangle
   def triangle_non_zero?
     @sides.all? {|side| side > 0} 
   end
+
   def triangle_inequality_violated?
     @sides[0] + @sides[1] <= @sides[2]
   end
