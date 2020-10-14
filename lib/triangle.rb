@@ -1,25 +1,26 @@
 class Triangle
-  def initialize (a,b,c)
-    @a = a
-    @b = b
-    @c = c
+  attr_accessor :sides
+  
+  @sides = []
+  
+  def initialize (a, b, c)
+    @sides = [a, b, c]
+    @sides.sort!
   end
-
+  
   def kind
-    all_sides = [@a, @b, @c]
-    all_sides.sort!
-    if all_sides.any? {|side| side <=0} 
+    if @sides.any?{|side| side <= 0} || ((@sides[0] + @sides[1]) <= @sides[2])
       raise TriangleError
-    elsif all_sides[0] + all_sides[1] <= all_sides[2]
-      raise TriangleError
-    elsif @a == @b && @b == @c
+    elsif @sides.uniq.length == 1
       :equilateral
-    elsif @a != @b && @b != @c && @a != @c               
-      :scalene
-    else
+    elsif @sides.uniq.length == 2
       :isosceles
+    else
+      :scalene
     end
   end
-
   
+  class TriangleError < StandardError
+    
+  end
 end
